@@ -1,0 +1,12 @@
+Archive/
+*.png
+*.mp4
+*.cast
+*.html
+*.zwc
+*.log
+*.db
+.groq_chat_history
+agent_resume_state.log
+consensus_chain.log
+/tmp/

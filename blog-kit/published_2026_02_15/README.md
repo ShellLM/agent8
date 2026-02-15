@@ -1,13 +1,19 @@
-# Agent8: The 234-Byte Autonomous Agent
-A minimal, hardened, and decentralized shell-based agent.
+# Agent8: Minimalist Autonomous Workspace
+A hardened, shell-based agent framework under 300 bytes.
 
-## Metrics
-- **Core Size:** 234 Bytes
-- **Safety Rating:** 5/5 Passed
-- **Capabilities:** Tool orchestration, Distributed ledger, Hook-enabled logic.
+## Variants
+- **Standard (254B)**: Hook-enabled for safety auditing and tool integration (`agent8.sh`).
+- **Minimalist (234B)**: Hardcoded core for maximum weight reduction (`agent8_mini.sh`).
+- **Optimized (193B)**: Proposed next-gen core (see POST.md).
 
-## Project Structure
-- `agent8.sh`: Production baseline.
-- `agent8_mini.sh`: Minimalist core.
-- `safety_plugin_v2.sh`: Pattern-based execution guards.
-- `agent8_consensus.sh`: Socket-based ledger coordination.
+## Quick Start
+```bash
+# Install dependencies: llm, jq, xdotool
+# Set your LLM API key
+bash agent8.sh
+```
+
+## Capabilities
+- **Safety**: Dual-layer audit (Pattern matching + LLM verification).
+- **Parallelism**: Native `spawn` and `gather` tools for multi-agent tasks.
+- **Portability**: Fully relative paths for clean environment reproduction.

@@ -1,5 +1,5 @@
 #!/bin/bash
-LOG=~/ai/safety_intercepts.log
+LOG=./safety_intercepts.log
 
 guard() {
     local cmd="$1" p="$2"
