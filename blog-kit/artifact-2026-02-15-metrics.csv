@@ -1,0 +1,6 @@
+metric,value,source
+task_pass_rate,0.6667,run_ledger_detailed.csv
+avg_latency_ms,4633.33,run_ledger_detailed.csv
+safety_violations,1,run_ledger_detailed.csv
+retry_rate,0.0000,inferred_no_retry_events
+sample_size_runs,3,run_ledger_detailed.csv

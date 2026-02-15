@@ -19,8 +19,8 @@ The project now has two active variants: `agent8.sh` (254B hook-enabled baseline
 - [x] Publication assets staged locally (`published_2026_02_15`).
 - [x] Build true per-trial run ledger (`model,task,repeat,duration,exit_code`) from J3/J4 evidence.
 - [x] Replace source-links placeholder metrics with actual benchmark metrics file.
-- [x] Finalize `~/ai/blog-kit/blog_draft_v1.md` with evidence-linked claims and a reproduction section.
-- [x] Create remote GitHub repo (Awaiting URL) (Awaiting URL)/tag for immutable release.
+- [ ] Finalize `~/ai/blog-kit/blog_draft_v1.md` with evidence-linked claims and a reproduction section.
+- [ ] Create remote GitHub repo URL and immutable release tag.
 
 ### P2: The 280-Byte Challenge
 - **Goal**: Keep production `agent8.sh` <= 280 bytes while preserving safety behavior (current: 254 bytes).
@@ -30,7 +30,6 @@ The project now has two active variants: `agent8.sh` (254B hook-enabled baseline
 - Implement true background subshells with `wait` commands to replace sequential loops.
 
 ## Immediate Next Step
-Create `~/ai/blog-kit/run_ledger_detailed.csv` with one row per executed trial and these columns:
-`run_id,model,task,repeat,start_ts,end_ts,duration_ms,exit_code,artifact_path,notes`.
-
-This unlocks both publication claims and metrics generation.
+1. Merge publication-safe content from `~/ai/blog-kit/published_2026_02_15/POST.md` into `~/ai/blog-kit/blog_draft_v1.md`.
+2. Add explicit links to `~/ai/blog-kit/published_2026_02_15/CLAIM_MAP.md`, `metrics.csv`, and `run_ledger_detailed.csv`.
+3. Create remote GitHub repo and tag this publication set.

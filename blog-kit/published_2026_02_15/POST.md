@@ -1,9 +1,9 @@
-# Post: The 300-Byte Autonomous Agent
+# Post: Agent8 Experimental Run (254B baseline, 234B mini)
 **Date:** 2026-02-14
-**Status:** Evidence Captured (J3 Pass)
+**Status:** Evidence Captured (Exploratory)
 
 ## The Experiment
-We tested "Agent8", a minimalist 300-byte shell-loop agent, against a 3-tool challenge:
+We tested Agent8 against a 3-tool challenge:
 1. **Search**: Live Google API integration.
 2. **Extraction**: Raw text to Python processing.
 3. **Synthesis**: Structured Markdown generation.
@@ -12,32 +12,29 @@ We tested "Agent8", a minimalist 300-byte shell-loop agent, against a 3-tool cha
 The agent successfully navigated the environment, proving that complex reasoning doesn't require complex boilerplate—only a tight loop and a well-defined synaptic interface.
 
 ## Metrics
-- **Success Rate:** 100% (n=1)
-- **Token Footprint:** (See Analysis below)
-- **Code Weight:** 300 bytes
-## Final Metrics - 2026-02-14 Run
-- **Agent Size:** 300 bytes (Base) / 305 bytes (Proposed Mini)
-- **Tool Execution:** 100% Success (Google Search, Python Synthesizer)
-- **Safety Interventions:** 1 (Self-modification prevented)
-- **Total Tokens Used in Artifacts:** 517
+- **Success Rate:** 66.67% (2/3 runs)
+- **Average Latency:** 4633.33 ms
+- **Safety Violations (run-level):** 1
+- **Code Sizes:** 254 bytes (`agent8.sh`) and 234 bytes (`agent8_mini.sh`)
 
 ## J3 (Advanced): Distributed Synthesis Test
 To push Agent8 to its limits, we simulated a "Researcher/Synthesizer" swarm.
 - **Researchers**: 3 Parallel threads investigating Sandboxing, Red-teaming, and HITL patterns.
 - **Synthesizer**: A master agent that aggregated ~1,500 tokens of raw research into a "State of Agent Safety 2026" report.
 
-**Result**: The architecture held perfectly. Even with a 300-byte core loop, the agent orchestrated high-level information retrieval and synthesis across multiple domains.
+**Result**: The architecture completed search and synthesis tasks in this exploratory run, with one failed safety-check run.
 
 ## Final Conclusion
-Agent8 proves that autonomy isn't about code volume; it's about the **Synaptic Loop**. By combining minimalist execution with high-parameter safety oversight, we've created a "Self-Healing Autonomous Workspace."
+This run suggests compact agent loops can orchestrate practical tasks, but broader claims require a larger model-task-repeat matrix.
 
 ## Verified Evidence
-- **Minimalist Core**: The agent logic is contained in exactly 254 bytes (`agent8.sh`).
-- **Safety Layer**: 3 intercepts recorded during the test suite (`safety_intercepts.log`).
-- **Performance**: Average latency of 4633ms per turn with a 66% task completion rate on first-attempt.
+- **Baseline Core**: `agent8.sh` is 254 bytes.
+- **Mini Variant**: `agent8_mini.sh` is 234 bytes.
+- **Safety Layer**: 3 blocked payloads are recorded in `safety_intercepts.log`.
+- **Performance**: Average latency of 4633.33 ms with a 66.67% task completion rate across 3 runs.
 
 ## The 280-Byte Challenge
-In Phase 2, we optimized the core loop further, achieving a **193-byte** footprint while maintaining full hook compatibility:
+In Phase 2, we explored additional code-golf variants. The 193-byte snippet below is a proposal and not the published production baseline:
 
 ```bash
 . ./ai_hooks.sh;[ -t 0 ]||o=$(cat);u=$(uuidgen);while :;do eval $P;r=$(llm -s "$(<"$0")" "$@" <<<"U:$u $o");c=$(sed -n '/^````/,/^````/{//!p}' <<<$r);eval $R;[ "$DONE" ]&&{ echo "$r";break; };done
@@ -51,4 +48,4 @@ git clone https://github.com/ShellLM/agent8 && cd agent8 && bash agent8.sh
 ```
 
 ## Evidence Map
-Detailed mappings of all claims to raw data can be found in the [Evidence Package](./publish/claim_map.md).
+Detailed mappings of all claims to raw data are in `CLAIM_MAP.md`.

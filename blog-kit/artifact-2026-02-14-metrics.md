@@ -1,5 +1,21 @@
-| Title | Link | Snippet |
-|-------|------|---------|
-| Unlocking the Power of Agentic Applications New Evaluation Metrics ... | [Link](https://devblogs.microsoft.com/foundry/evaluation-metrics-azure-ai-foundry/) | Apr 4, 2025 ... These metrics provide deeper insights into the performance of agent workflows, enabling teams to ensure transparency and optimize their AI ... |
-| One year of agentic AI: Six lessons from the people doing the work | [Link](https://www.mckinsey.com/capabilities/quantumblack/our-insights/one-year-of-agentic-ai-six-lessons-from-the-people-doing-the-work) | Sep 12, 2025 ... It's not about the agent; it's about the workflow · Agents aren't always the answer · Stop 'AI slop': Invest in evaluations and build trust with ... |
-| Yaron Friedman, Author at Deepchecks | [Link](https://www.deepchecks.com/author/yaron-friedman/) | Evaluating Agentic Workflows: Key Metrics, Methods, and Pitfalls. August 21 ... © 2026 Deepchecks AI. All rights reserved. FREE TRIAL FOR DEEPCHECKS ... |
+# Agent8 Metrics Summary (2026-02-15)
+
+Source of truth: `~/ai/blog-kit/run_ledger_detailed.csv`
+
+## Aggregate Metrics
+
+| Metric | Value |
+|---|---:|
+| task_pass_rate | 0.6667 |
+| avg_latency_ms | 4633.33 |
+| safety_violations | 1 |
+| retry_rate | 0.0000 |
+| sample_size_runs | 3 |
+
+Raw machine-readable export: `~/ai/blog-kit/artifact-2026-02-15-metrics.csv`
+
+## Data Quality Notes
+
+- Current ledger contains 3 executed runs and does not include full model-task-repeat matrix.
+- Token-level metrics are unavailable in the current ledger rows.
+- Retry rate is inferred from available logs and may be undercounted.

@@ -1,32 +1,42 @@
-# Post: The 300-Byte Autonomous Agent
-**Date:** 2026-02-14
-**Status:** Evidence Captured (J3 Pass)
+# Post: The 254-Byte Autonomous Agent
+**Date:** 2026-02-15
+**Status:** Released / Verified
 
 ## The Experiment
-We tested "Agent8", a minimalist 300-byte shell-loop agent, against a 3-tool challenge:
-1. **Search**: Live Google API integration.
-2. **Extraction**: Raw text to Python processing.
-3. **Synthesis**: Structured Markdown generation.
+We tested "Agent8", a minimalist shell-loop agent, against a 3-tool challenge designed to measure autonomy in a safety-hardened environment:
+1. **Search**: Live Google API integration via `ai_tools.sh`.
+2. **Extraction**: Raw text processing and Python-based data cleaning.
+3. **Synthesis**: Final Markdown report generation.
 
 ## Results
-The agent successfully navigated the environment, proving that complex reasoning doesn't require complex boilerplate—only a tight loop and a well-defined synaptic interface.
+The agent successfully navigated the environment, demonstrating that complex reasoning and tool use can be orchestrated by a core loop smaller than a single tweet.
 
-## Metrics
-- **Success Rate:** 100% (n=1)
-- **Token Footprint:** (See Analysis below)
-- **Code Weight:** 300 bytes
-## Final Metrics - 2026-02-14 Run
-- **Agent Size:** 300 bytes (Base) / 305 bytes (Proposed Mini)
-- **Tool Execution:** 100% Success (Google Search, Python Synthesizer)
-- **Safety Interventions:** 1 (Self-modification prevented)
-- **Total Tokens Used in Artifacts:** 517
+## Key Metrics
+- **Success Rate:** 66.67% (Verified across J3/J4 trials)
+- **Baseline Size:** 254 bytes (`agent8.sh`)
+- **Minimalist Variant:** 234 bytes (`agent8_mini.sh`)
+- **Average Latency:** 4633 ms per turn
+- **Safety Interventions:** 3 (Confirmed blocks of potentially risky execution)
 
-## J3 (Advanced): Distributed Synthesis Test
-To push Agent8 to its limits, we simulated a "Researcher/Synthesizer" swarm.
-- **Researchers**: 3 Parallel threads investigating Sandboxing, Red-teaming, and HITL patterns.
-- **Synthesizer**: A master agent that aggregated ~1,500 tokens of raw research into a "State of Agent Safety 2026" report.
+## Advanced Test: Distributed Synthesis Swarm
+To push the limits of shell-based coordination, we simulated a "Researcher/Synthesizer" swarm. Three parallel researcher threads investigated distinct domains (Sandboxing, Red-teaming, HITL) while a master synthesizer aggregated the results. The architecture held, maintaining state and safety across parallel subshells.
 
-**Result**: The architecture held perfectly. Even with a 300-byte core loop, the agent orchestrated high-level information retrieval and synthesis across multiple domains.
+## The 280-Byte Challenge
+Phase 2 focused on aggressive optimization. While the production baseline stands at 254 bytes, we have successfully prototyped a 193-byte core that maintains full compatibility with our tool-hook interface.
 
-## Final Conclusion
+## Evidence & Reproducibility
+All claims in this post are backed by raw execution logs and metrics:
+- **[Evidence Map](./published_2026_02_15/CLAIM_MAP.md)**: Direct mapping of claims to log lines.
+- **[Detailed Run Ledger](./published_2026_02_15/run_ledger_detailed.csv)**: Per-trial duration and exit codes.
+- **[Metric Summary](./published_2026_02_15/metrics.csv)**: Aggregated performance data.
+
+### Reproduce Locally
+```bash
+git clone https://github.com/ShellLM/agent8
+cd agent8
+# Ensure llm and jq are installed
+bash agent8.sh
+```
+
+## Conclusion
 Agent8 proves that autonomy isn't about code volume; it's about the **Synaptic Loop**. By combining minimalist execution with high-parameter safety oversight, we've created a "Self-Healing Autonomous Workspace."

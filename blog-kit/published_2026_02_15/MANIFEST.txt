@@ -10,4 +10,5 @@ POST.md
 README.md
 REPRODUCTION.md
 run_ledger_detailed.csv
+safety_intercepts.log
 safety_plugin_v2.sh

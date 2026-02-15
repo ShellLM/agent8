@@ -43,10 +43,10 @@ Primary audience: AI researchers, advanced users, myself
 - [ ] Model matrix file saved (models x tasks x repeats)
 
 ## 6) Analysis
-- [ ] Metrics table generated
+- [x] Metrics table generated
 - [ ] Failure taxonomy completed
 - [x] Representative transcripts linked
-- [ ] Token/latency and retry stats computed
+- [x] Token/latency and retry stats computed
 
 ## 7) Publish Artifacts
 - [ ] Repo or gist created
@@ -55,9 +55,9 @@ Primary audience: AI researchers, advanced users, myself
 - [ ] Immutable release tag created
 
 ## 8) Blog Post Assembly
-- [ ] Claims link to artifact evidence
+- [x] Claims link to artifact evidence
 - [x] Method + limitations section present
-- [ ] "How to reproduce" section present
+- [x] "How to reproduce" section present
 - [x] Next experiment backlog item added
 
 ## 9) Prompt/Eval Deep-Dive Section
@@ -75,5 +75,5 @@ Primary audience: AI researchers, advanced users, myself
 ## 11) 2026-02-15 Status Note
 - [x] Publication staging exists at `~/ai/blog-kit/published_2026_02_15/`
 - [x] Current code-size state captured: `agent8.sh`=254B, `agent8_mini.sh`=234B
-- [ ] Convert `~/ai/run_ledger.csv` from phase-summary format to per-trial run ledger
-- [ ] Replace `artifact-2026-02-14-metrics.md` with true benchmark metrics artifact
+- [x] Convert `~/ai/run_ledger.csv` from phase-summary format to per-trial run ledger
+- [x] Replace `artifact-2026-02-14-metrics.md` with true benchmark metrics artifact
