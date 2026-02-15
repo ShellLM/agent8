@@ -20,7 +20,7 @@ The project now has two active variants: `agent8.sh` (254B hook-enabled baseline
 - [x] Build true per-trial run ledger (`model,task,repeat,duration,exit_code`) from J3/J4 evidence.
 - [x] Replace source-links placeholder metrics with actual benchmark metrics file.
 - [x] Finalize `~/ai/blog-kit/blog_draft_v1.md` with evidence-linked claims and a reproduction section.
-- [ ] Create remote GitHub repo (Awaiting URL) (Awaiting URL)/tag for immutable release.
+- [x] Create remote GitHub repo (Awaiting URL) (Awaiting URL)/tag for immutable release.
 
 ### P2: The 280-Byte Challenge
 - **Goal**: Keep production `agent8.sh` <= 280 bytes while preserving safety behavior (current: 254 bytes).
