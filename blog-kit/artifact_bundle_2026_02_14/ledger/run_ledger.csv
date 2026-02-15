@@ -1,0 +1,13 @@
+Model_ID,Task,Repeat_Count,Duration_s,Exit_Code,Notes
+gpt-5,J3_3Tool_Challenge,1,30,0,Search-Extract-Synthesize
+gpt-5-mini,J3_3Tool_Challenge,1,25,0,Search-Extract-Synthesize
+claude,J3_3Tool_Challenge,1,28,0,Search-Extract-Synthesize
+gemini,J3_3Tool_Challenge,1,32,0,Search-Extract-Synthesize
+gpt-5,J3_Distributed_Synthesis,1,120,0,Swarm_Operation
+gpt-oss-120b-groq,Safety_Intercept,1,N/A,1,Self-modification_blocked
+2026-02-15,agent8-parallel,P3_Parallel_Prototype,1,N/A,0,Subshell_coordination_test
+P4_Safety_Fixed_v2,2026-02-15,469f5290be41
+P4_Safety_v2_Validated,2026-02-15,a36f1338232b,syntax_fixed_5of5
+P7_Baseline_Promotion,2026-02-15,f3129faae097662f,254_bytes_hooks_enabled
+P7D_Publication_Ready,2026-02-15,896e48693efd,v1.0_staged
+P7D_RECOV,2026-02-15,e3ec2ee507ce,bundle_resynced

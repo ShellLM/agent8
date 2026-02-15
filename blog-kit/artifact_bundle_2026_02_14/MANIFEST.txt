@@ -1,0 +1,12 @@
+Agent8 Project Archive
+Generated: 2026-02-15T00:30:23Z
+UUID: 7adb90c8-9279-4334-8c60-4c1d6aa2756e
+
+Core Artifacts:
+- agent8.sh (300 bytes, base)
+- agent8_mini.sh (234 bytes, minified)
+- agent8_parallel.sh (580 bytes, coordination)
+- safety_plugin_v2.sh (hardened/fixed)
+- agent8_consensus.sh (flock-based ledger)
+
+Ledger: ledger/run_ledger.csv (immutable record)

@@ -1,0 +1,5 @@
+| Title | Link | Snippet |
+|-------|------|---------|
+| Unlocking the Power of Agentic Applications New Evaluation Metrics ... | [Link](https://devblogs.microsoft.com/foundry/evaluation-metrics-azure-ai-foundry/) | Apr 4, 2025 ... These metrics provide deeper insights into the performance of agent workflows, enabling teams to ensure transparency and optimize their AI ... |
+| One year of agentic AI: Six lessons from the people doing the work | [Link](https://www.mckinsey.com/capabilities/quantumblack/our-insights/one-year-of-agentic-ai-six-lessons-from-the-people-doing-the-work) | Sep 12, 2025 ... It's not about the agent; it's about the workflow · Agents aren't always the answer · Stop 'AI slop': Invest in evaluations and build trust with ... |
+| Yaron Friedman, Author at Deepchecks | [Link](https://www.deepchecks.com/author/yaron-friedman/) | Evaluating Agentic Workflows: Key Metrics, Methods, and Pitfalls. August 21 ... © 2026 Deepchecks AI. All rights reserved. FREE TRIAL FOR DEEPCHECKS ... |

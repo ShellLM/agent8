@@ -1,0 +1,12 @@
+33e967b5c45994a8c06eba871ee0d3e4917705acfa2eea397758ba515f58ccfb  /home/thomas/ai/agent8_consensus.sh
+69ee89e1cdbe8db801c4277417a81a3aa4338b59e1ccd9f3bf40b814c736a84f  /home/thomas/ai/agent8_mini.sh
+fe20482a2bb9d5d28548dd48536926cabfa7a7b09dc4e498680642851a390e61  /home/thomas/ai/agent8_parallel.sh
+f3129faae097662f2f20b958c421882e100abb0c40d5abc3628ec2a020993fbe  /home/thomas/ai/agent8.sh
+b37ea11c215fe00923bd26d61275d229776e265f843b16ced6bcc42539f9669a  /home/thomas/ai/agent8_v1_300b_backup.sh
+762bff1df28dc515d2f298f190e40800106127ef769d85512a26c7e1b6f3ddca  /home/thomas/ai/ai_hooks.sh
+d3f22e1717d8acb6149e4be95edf0394db868e16fd1470873d3644c49ce9f639  /home/thomas/ai/ai_tools.sh
+0ead04cb060849180c3435b607a66f148638db59ba077857918561e57aa7a7b7  /home/thomas/ai/emergent.sh
+563b3da327cd3a5d4817e0fac3aeacd8bb0d86323a01e33079d73525766e5af1  /home/thomas/ai/emergent_tui.sh
+b6f7a2df9df4c8a18916770f07f112e7245da1839619a3c2b4db9a2cd6d5f305  /home/thomas/ai/groq_chat.sh
+0d98e0885d54edbe0c4e7ee1051d15503435c0387015a9bb0225ca1a28a4e62b  /home/thomas/ai/recdemo.sh
+a36f1338232b676d80fdd42d4faa8117851e2ef97ac2ed33fd51497baae1c35e  /home/thomas/ai/safety_plugin_v2.sh
