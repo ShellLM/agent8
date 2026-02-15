@@ -1,42 +1,40 @@
 # Post: The 254-Byte Autonomous Agent
 **Date:** 2026-02-15
-**Status:** Released / Verified
+**Status:** Publication Draft (Evidence-Bounded)
 
-## The Experiment
-We tested "Agent8", a minimalist shell-loop agent, against a 3-tool challenge designed to measure autonomy in a safety-hardened environment:
-1. **Search**: Live Google API integration via `ai_tools.sh`.
-2. **Extraction**: Raw text processing and Python-based data cleaning.
-3. **Synthesis**: Final Markdown report generation.
+## Method
+Agent8 was evaluated on a 3-task shell workflow in a safety-hardened environment:
+1. **Search** via tool integration.
+2. **Synthesis** via multi-step generation.
+3. **Safety-Check** under policy interception.
+
+This publication distinguishes planned scope from executed scope: the original plan targeted a broader model matrix, while the release evidence in this bundle reflects executed runs only.
 
 ## Results
-The agent successfully navigated the environment, demonstrating that complex reasoning and tool use can be orchestrated by a core loop smaller than a single tweet.
+- **Baseline size:** 254 bytes (`agent8.sh`)
+- **Mini size:** 234 bytes (`agent8_mini.sh`)
+- **Task pass rate:** 0.6667 (2/3 runs successful)
+- **Average latency:** 4633.33 ms
+- **Run-level failures:** 1/3 runs (from non-zero `exit_code`)
+- **Blocked attempts:** 3 intercepted actions (from safety intercept log)
 
-## Key Metrics
-- **Success Rate:** 66.67% (Verified across J3/J4 trials)
-- **Baseline Size:** 254 bytes (`agent8.sh`)
-- **Minimalist Variant:** 234 bytes (`agent8_mini.sh`)
-- **Average Latency:** 4633 ms per turn
-- **Safety Interventions:** 3 (Confirmed blocks of potentially risky execution)
+All claims are evidence-linked in:
+- `~/ai/blog-kit/published_2026_02_15/CLAIM_MAP.md`
+- `~/ai/blog-kit/published_2026_02_15/metrics.csv`
+- `~/ai/blog-kit/published_2026_02_15/run_ledger_detailed.csv`
 
-## Advanced Test: Distributed Synthesis Swarm
-To push the limits of shell-based coordination, we simulated a "Researcher/Synthesizer" swarm. Three parallel researcher threads investigated distinct domains (Sandboxing, Red-teaming, HITL) while a master synthesizer aggregated the results. The architecture held, maintaining state and safety across parallel subshells.
+## Limitations
+- This is an exploratory run set (`n=3`) and not a full model-task-repeat matrix.
+- Run-level failures and blocked-attempt counts measure different safety properties and are reported separately.
+- Token-level metrics are not asserted as canonical in this draft because they are not uniformly available in the current run ledger.
 
-## The 280-Byte Challenge
-Phase 2 focused on aggressive optimization. While the production baseline stands at 254 bytes, we have successfully prototyped a 193-byte core that maintains full compatibility with our tool-hook interface.
+## How to Reproduce
+Use the bundled instructions and artifacts:
+- `~/ai/blog-kit/published_2026_02_15/REPRODUCTION.md`
+- `~/ai/blog-kit/published_2026_02_15/MANIFEST.txt`
 
-## Evidence & Reproducibility
-All claims in this post are backed by raw execution logs and metrics:
-- **[Evidence Map](./published_2026_02_15/CLAIM_MAP.md)**: Direct mapping of claims to log lines.
-- **[Detailed Run Ledger](./published_2026_02_15/run_ledger_detailed.csv)**: Per-trial duration and exit codes.
-- **[Metric Summary](./published_2026_02_15/metrics.csv)**: Aggregated performance data.
-
-### Reproduce Locally
+Minimal local run:
 ```bash
-git clone https://github.com/ShellLM/agent8
-cd agent8
-# Ensure llm and jq are installed
+cd ~/ai/blog-kit/published_2026_02_15
 bash agent8.sh
 ```
-
-## Conclusion
-Agent8 proves that autonomy isn't about code volume; it's about the **Synaptic Loop**. By combining minimalist execution with high-parameter safety oversight, we've created a "Self-Healing Autonomous Workspace."

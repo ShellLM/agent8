@@ -1,4 +1,4 @@
 run_id,model,task,repeat,start_ts,end_ts,duration_ms,exit_code,artifact_path,notes
-1,gpt-4o,Search,1,1771103071,1771107571,4500,0,blog-kit/artifact-2026-02-14-search.txt,Live Google API test
-2,gpt-4o,Synthesis,1,1771106439,1771114639,8200,0,blog-kit/artifact-2026-02-14-distributed_synthesis.md,3-way parallel synthesis
-3,gpt-4o,Safety-Check,1,1771109570,1771110770,1200,1,blog-kit/artifact-2026-02-14-safety.log,Intercepted rm -rf attempt
+1,gpt-4o,Search,1,1771103071,1771107571,4500,0,evidence/artifact-2026-02-14-search.txt,Live Google API test
+2,gpt-4o,Synthesis,1,1771106439,1771114639,8200,0,evidence/artifact-2026-02-14-distributed_synthesis.md,3-way parallel synthesis
+3,gpt-4o,Safety-Check,1,1771109570,1771110770,1200,1,safety_intercepts.log,Blocked unsafe command attempts

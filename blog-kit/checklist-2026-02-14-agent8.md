@@ -7,11 +7,11 @@ Primary audience: AI researchers, advanced users, myself
 
 ## 0) Job Queue (execution order)
 - [x] J1: Freeze hypothesis, metrics, and threat model
-- [ ] J2: Capture immutable run evidence (`llm` logs + asciinema + scripts)
-- [ ] J3: Build model challenge matrix and execute repeats
-- [ ] J4: Analyze logs and compute metrics
+- [x] J2: Capture immutable run evidence (`llm` logs + asciinema + scripts)
+- [x] J3: Build model challenge matrix and execute repeats
+- [x] J4: Analyze logs and compute metrics
 - [x] J5: Publish artifact bundle created
-- [ ] J6: Draft blog (V1 Ready) with claim-evidence mapping
+- [x] J6: Draft blog (V1 Ready) with claim-evidence mapping
 
 ## 1) Research Question
 - [x] Hypothesis is falsifiable
@@ -46,12 +46,12 @@ Primary audience: AI researchers, advanced users, myself
 - [x] Metrics table generated
 - [ ] Failure taxonomy completed
 - [x] Representative transcripts linked
-- [x] Token/latency and retry stats computed
+- [ ] Token/latency and retry stats computed
 
 ## 7) Publish Artifacts
-- [ ] Repo or gist created
+- [x] Repo or gist created (Git initialized)
 - [x] All artifact file hashes recorded
-- [ ] Reproduction script included
+- [x] Reproduction script included
 - [ ] Immutable release tag created
 
 ## 8) Blog Post Assembly
@@ -77,3 +77,4 @@ Primary audience: AI researchers, advanced users, myself
 - [x] Current code-size state captured: `agent8.sh`=254B, `agent8_mini.sh`=234B
 - [x] Convert `~/ai/run_ledger.csv` from phase-summary format to per-trial run ledger
 - [x] Replace `artifact-2026-02-14-metrics.md` with true benchmark metrics artifact
+- [x] Published run set and references reconciled for self-contained bundle paths

@@ -19,7 +19,7 @@ The project now has two active variants: `agent8.sh` (254B hook-enabled baseline
 - [x] Publication assets staged locally (`published_2026_02_15`).
 - [x] Build true per-trial run ledger (`model,task,repeat,duration,exit_code`) from J3/J4 evidence.
 - [x] Replace source-links placeholder metrics with actual benchmark metrics file.
-- [ ] Finalize `~/ai/blog-kit/blog_draft_v1.md` with evidence-linked claims and a reproduction section.
+- [x] Finalize `~/ai/blog-kit/blog_draft_v1.md` with evidence-linked claims and a reproduction section.
 - [ ] Create remote GitHub repo URL and immutable release tag.
 
 ### P2: The 280-Byte Challenge
@@ -30,6 +30,5 @@ The project now has two active variants: `agent8.sh` (254B hook-enabled baseline
 - Implement true background subshells with `wait` commands to replace sequential loops.
 
 ## Immediate Next Step
-1. Merge publication-safe content from `~/ai/blog-kit/published_2026_02_15/POST.md` into `~/ai/blog-kit/blog_draft_v1.md`.
-2. Add explicit links to `~/ai/blog-kit/published_2026_02_15/CLAIM_MAP.md`, `metrics.csv`, and `run_ledger_detailed.csv`.
-3. Create remote GitHub repo and tag this publication set.
+1. Execute `~/ai/blog-kit/release_next_commands.md` to create remote repo URL, push publication files, and create immutable release tag.
+2. Run the post-release verification checklist in that same file.
