@@ -1,0 +1,1 @@
+. ~/ai/ai_hooks.sh;[ -t 0 ]||o=$(cat);u=$(uuidgen|cut -d- -f1);while :;do eval $P;r=$(llm -s "$(<$0)" "$@" "${d:+<U:$u $o}");set --;c=${r#*"\`\`\`\`"};c=${c%%"\`\`\`\`"*};eval $R;[ "$DONE" ]||[[ "$c" =~ DONE=1 ]]&&{ echo "$r";break; };done

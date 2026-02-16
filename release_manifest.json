@@ -1,0 +1,11 @@
+{
+  "timestamp": "2026-02-15T12:55:42Z",
+  "artifacts": [
+    { "file": "agent8.sh", "sha256": "f3129faae097662f2f20b958c421882e100abb0c40d5abc3628ec2a020993fbe", "size": 254 },
+    { "file": "agent8_mini.sh", "sha256": "69ee89e1cdbe8db801c4277417a81a3aa4338b59e1ccd9f3bf40b814c736a84f", "size": 234 },
+    { "file": "agent8_consensus.sh", "sha256": "c9543c7df2b363ff64de461fc77062b6528460e595abd85b303019ddcb0049c2", "size": 521 },
+    { "file": "safety_plugin_v2.sh", "sha256": "a1715e2eb4d97be663e8845f35923a9e6e8e0d565900561bc218511ba5825e72", "size": 758 },
+    { "file": "blog-kit/blog_draft_final.md", "sha256": "41921bc488aacfc2e3451209ad8ca4f41352da5dfaf31ed08542e7740ee280b0", "size": 2675 },
+    { "file": "consensus_chain.log", "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "size": 0 }
+  ]
+}

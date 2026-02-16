@@ -1,1 +1,1 @@
-. ~/ai/ai_hooks.sh;d=;for a;do [ "$a" = --cid ]&&d=$2;shift;done;[ -t 0 ]||o=$(cat);u=$(uuidgen);while :;do eval $P;r=$(llm -s "$(<$0)" ${d:+--cid $d} <<<"U:$u $o");c=$(sed -n '/^````/,/^````/{//!p}' <<<$r);eval $R;[ "$DONE" ]&&{ echo "$r";break; };done
+. ~/ai/ai_hooks.sh;while [ "$1" ];do [ "$1" = --cid ]&&{ d=$2;shift 2; }||break;done;[ -t 0 ]||o=$(cat);u=$(uuidgen|cut -d- -f1);while :;do eval $P;r=$(llm -s "$(<$0)" "$@" ${d:+--cid $d} <<<"U:$u $o");c=$(sed -n '/^````/,/^````/{//!p}' <<<$r);eval $R;[ "$DONE" ]||[[ "$c" =~ DONE=1 ]]&&{ echo "$r";break; };done
