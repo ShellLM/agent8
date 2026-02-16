@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Evidence">
+  <h1>Evidence & Metrics</h1>
+  
+  <h2>Metrics Summary</h2>
+  <table>
+    <tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+    <tr><td>Baseline size</td><td>254B</td><td>agent8.sh</td></tr>
+    <tr><td>Mini variant</td><td>234B</td><td>agent8_mini.sh</td></tr>
+    <tr><td>Task pass rate</td><td>66.67%</td><td>metrics.csv</td></tr>
+    <tr><td>Avg latency</td><td>4633.33ms</td><td>metrics.csv</td></tr>
+    <tr><td>Safety intercepts</td><td>3</td><td>safety_intercepts.log</td></tr>
+  </table>
+  
+  <h2>Claim Map</h2>
+  <p>All claims are traced to evidence files. See CLAIM_MAP.md in the release bundle.</p>
+</Base>

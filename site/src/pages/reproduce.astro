@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Reproduce">
+  <h1>Reproduce the Experiment</h1>
+  
+  <h2>Prerequisites</h2>
+  <ul>
+    <li>bash 4.0+</li>
+    <li>llm CLI (simonw/llm)</li>
+    <li>API key for supported model</li>
+  </ul>
+  
+  <h2>Steps</h2>
+  <pre><code># Clone the repository
+git clone https://github.com/ShellLM/agent8.git
+cd agent8
+
+# Run the core loop
+./agent8.sh "Your prompt here"</code></pre>
+  
+  <h2>Verification</h2>
+  <p>Checksums available in MANIFEST.txt.</p>
+</Base>
