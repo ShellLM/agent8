@@ -81,7 +81,7 @@ read_screen() {
 
     [ ! -f "$img" ] && sleep 1
     if [ -f "$img" ]; then
-        local cid=$(sqlite3 "$(llm logs path)" "SELECT conversation_id FROM responses ORDER BY id DESC LIMIT 1")
+        local cid=$(sqlite3 -noheader "$(llm logs path)" "SELECT conversation_id FROM responses ORDER BY id DESC LIMIT 1")
         echo "--- SCREEN ANALYSIS START ---"
         llm -a "$img" "Analyze screen capture $t. Describe the active task context."
         echo "--- SCREEN ANALYSIS END ---"

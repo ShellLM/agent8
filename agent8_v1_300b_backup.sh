@@ -1,6 +1,7 @@
 source ~/ai/ai_hooks.sh
 [ -t 0 ]||o=$(cat);u=$(uuidgen)
 while :;do
+echo "d: $d"
 eval "${P:-:}"
 r=$(llm -s "$(<"$0")" "$@" ${d:+--cid $d} <<<"U:$u
 $o")

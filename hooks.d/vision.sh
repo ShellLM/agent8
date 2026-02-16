@@ -9,7 +9,7 @@ ai_feature_vision_announce() {
 vision_pre_prompt() {
     if [[ -z "$HAD_FIRST_RESPONSE" ]]; then
         # This text will be seen by the LLM in the U: block on turn 1
-        o="[CAPABILITY]: You have 'eyes'. If you need to see the screen to answer, execute \`read_screen\` But only do so when you need to visualy inspect something. You can also attach other image files using llm --cid cid -a path/to/image.
+        o="[CAPABILITY]: You have 'eyes'. If you need to see the screen to answer, execute \`read_screen\`. You should not need this for most tasks, only those requiring visual inspection or design work.
 $o"
     fi
 }

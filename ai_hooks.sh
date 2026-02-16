@@ -2,7 +2,7 @@
 
 ai_pre_prompt_hook() {
     if [ -z "$FIRST_TURN" ]; then
-        SYS_TOOLS="$(<./ai_tools.sh)"
+        SYS_TOOLS="$(~/ai/ai_tools.sh)"
         export FIRST_TURN=1
     fi
 }
@@ -16,7 +16,7 @@ AI_RESPONSE_PLUGINS=(
 
 ai_handle_response_hook() {
     unset DONE
-    source ./ai_tools.sh
+    source ~/ai/ai_tools.sh
     
     if [[ $c ]]; then
         # Run plugins
@@ -44,25 +44,25 @@ ai_handle_response_hook() {
 
             unset PENDING_FEEDBACK_ID
         elif [[ -z "$HAD_FIRST_RESPONSE" ]]; then
-            resp_id=$(sqlite3 -cmd ".timeout 5000" "$(llm logs path)" "SELECT id FROM responses ${u:+WHERE prompt LIKE '%U:$u%'} ORDER BY id DESC LIMIT 1")
+            resp_id=$(sqlite3 -noheader -cmd ".timeout 5000" "$(llm logs path)" "SELECT id FROM responses ${u:+WHERE prompt LIKE '%U:$u%'} ORDER BY id DESC LIMIT 1" 2>/dev/null)
             llm feedback+1 --prompt_id "$resp_id" "[ok:formatting]" > /dev/null 2>&1
 
             export HAD_FIRST_RESPONSE=1
         fi
 
         cat <<EOF > /tmp/ai_code_$u.sh
-source ./ai_tools.sh
+source ~/ai/ai_tools.sh
 $c
 EOF
         script -q -e -c "bash /tmp/ai_code_$u.sh" /tmp/ai_out_$u_$u_$u
         exit_code=$?
         o=$(cat /tmp/ai_out_$u_$u_$u)
         echo -e "\033[35mEXIT CODE:\033[0m $exit_code"
-        d=$(sqlite3 -cmd ".timeout 5000" "$(llm logs path)" "SELECT conversation_id FROM responses ${u:+WHERE prompt LIKE '%U:$u%'} ORDER BY id DESC LIMIT 1")
+        d=$(sqlite3 -noheader -cmd ".timeout 5000" "$(llm logs path)" "SELECT conversation_id FROM responses ${u:+WHERE prompt LIKE '%U:$u%'} ORDER BY id DESC LIMIT 1" 2>/dev/null)
     elif [[ -z $HAD_FIRST_RESPONSE ]]; then
         export HAD_FIRST_RESPONSE=1
         o="[SYSTEM WARNING]: No code block detected. Use \`\`\`\` to execute bash or reply 'NO OP'."
-        d=$(sqlite3 -cmd ".timeout 5000" "$(llm logs path)" "SELECT conversation_id FROM responses ORDER BY id DESC LIMIT 1")
+        d=$(sqlite3 -noheader -cmd ".timeout 5000" "$(llm logs path)" "SELECT conversation_id FROM responses ORDER BY id DESC LIMIT 1" 2>/dev/null)
     else
         DONE=1
     fi

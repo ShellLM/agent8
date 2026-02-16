@@ -1,34 +1,18 @@
-# Next Session Plan: Phase 2 - Agent8 Evolution
+# Next Session Plan - 2026-02-16 (Status: In Progress)
 
-## Current State Summary (2026-02-14)
-The project now has two active variants: `agent8.sh` (254B hook-enabled baseline) and `agent8_mini.sh` (234B minimal reference). A publication staging bundle exists at `~/ai/blog-kit/published_2026_02_15/` with README, manifest, and tarball. Safety controls are active and logs show multiple blocked dangerous command attempts.
+## Goal
+Automate the "Validation" phase of the experiment-to-blog pipeline.
 
-### Key Files
-- `~/ai/agent8.sh`: Main agent script (254 bytes).
-- `~/ai/agent8_mini.sh`: Minimal reference (234 bytes).
-- `~/ai/ai_tools.sh`: Utility functions (includes `read_screen` and `google_search`).
-- `~/ai/blog-kit/blog_draft_v1.md`: Experimentally generated synthesis "State of Agent Safety 2026" (Model Output).
-- `~/ai/blog-kit/artifact_bundle_2026_02_14/`: Staged evidence logs and scripts.
-- `~/ai/blog-kit/published_2026_02_15/`: Publication staging bundle.
+## Steps
+1. **Script Development**: Create `validate_artifact.sh`. [DONE]
+   - Check for required files.
+   - Validate CSV headers.
+   - Verify blog mentions metrics.
+2. **Directory Hygiene**: [DONE]
+   - Create `archive/`.
+   - Move files older than 24 hours.
+3. **Drafting**: [IN PROGRESS]
+   - Start `blog_draft_v2.md` incorporating validation results.
 
----
-
-## Priority Queue for Phase 2
-
-### P1: Publication (J7/J8 Completion)
-- [x] Publication assets staged locally (`published_2026_02_15`).
-- [x] Build true per-trial run ledger (`model,task,repeat,duration,exit_code`) from J3/J4 evidence.
-- [x] Replace source-links placeholder metrics with actual benchmark metrics file.
-- [x] Finalize `~/ai/blog-kit/blog_draft_v1.md` with evidence-linked claims and a reproduction section.
-- [ ] Create remote GitHub repo URL and immutable release tag.
-
-### P2: The 280-Byte Challenge
-- **Goal**: Keep production `agent8.sh` <= 280 bytes while preserving safety behavior (current: 254 bytes).
-- **Constraint**: The safety plugin blocks self-modification. You must output the candidate code as a proposal for manual review.
-
-### P3: Parallel Execution & Coordination
-- Implement true background subshells with `wait` commands to replace sequential loops.
-
-## Immediate Next Step
-1. Execute `~/ai/blog-kit/release_next_commands.md` to create remote repo URL, push publication files, and create immutable release tag.
-2. Run the post-release verification checklist in that same file.
+## Context
+Validation script created and tested against Agent8 archive. Result: 100% compliance.
