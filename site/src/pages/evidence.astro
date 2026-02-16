@@ -6,14 +6,35 @@ import Base from '../layouts/Base.astro';
   
   <h2>Metrics Summary</h2>
   <table>
-    <tr><th>Metric</th><th>Value</th><th>Source</th></tr>
-    <tr><td>Baseline size</td><td>254B</td><td>agent8.sh</td></tr>
-    <tr><td>Mini variant</td><td>234B</td><td>agent8_mini.sh</td></tr>
-    <tr><td>Task pass rate</td><td>66.67%</td><td>metrics.csv</td></tr>
-    <tr><td>Avg latency</td><td>4633.33ms</td><td>metrics.csv</td></tr>
-    <tr><td>Safety intercepts</td><td>3</td><td>safety_intercepts.log</td></tr>
+    <tr><th>Metric</th><th>Value</th></tr>
+    <tr><td>Task Pass Rate</td><td>66.67%</td></tr>
+    <tr><td>Average Latency</td><td>4633.33 ms</td></tr>
+    <tr><td>Failed Runs</td><td>1 / 3</td></tr>
+    <tr><td>Blocked Attempts</td><td>3</td></tr>
   </table>
-  
-  <h2>Claim Map</h2>
-  <p>All claims are traced to evidence files. See CLAIM_MAP.md in the release bundle.</p>
+
+  <h2>Run Ledger</h2>
+  <table>
+    <tr><th>Run</th><th>Task</th><th>Model</th><th>Duration</th><th>Status</th></tr>
+    <tr><td>1</td><td>Search</td><td>gpt-4o</td><td>4500ms</td><td>✓ Pass</td></tr>
+    <tr><td>2</td><td>Synthesis</td><td>gpt-4o</td><td>8200ms</td><td>✓ Pass</td></tr>
+    <tr><td>3</td><td>Safety-Check</td><td>gpt-4o</td><td>1200ms</td><td>✗ Fail</td></tr>
+  </table>
+
+  <h2>Artifact Files</h2>
+  <ul>
+    <li><a href="/evidence/metrics.csv">metrics.csv</a> - Raw metrics data</li>
+    <li><a href="/evidence/run_ledger_detailed.csv">run_ledger_detailed.csv</a> - Full run details</li>
+    <li><a href="/evidence/CLAIM_MAP.md">CLAIM_MAP.md</a> - Claim-to-evidence mapping</li>
+    <li><a href="/evidence/MANIFEST.txt">MANIFEST.txt</a> - SHA256 checksums</li>
+  </ul>
+
+  <h2>Claim Verification</h2>
+  <p>All claims in the blog post are traceable to evidence:</p>
+  <table>
+    <tr><th>Claim</th><th>Source</th></tr>
+    <tr><td>254B baseline</td><td>agent8.sh in release bundle</td></tr>
+    <tr><td>66.67% pass rate</td><td>metrics.csv row 2</td></tr>
+    <tr><td>3 blocked attempts</td><td>safety_intercepts.log</td></tr>
+  </table>
 </Base>
