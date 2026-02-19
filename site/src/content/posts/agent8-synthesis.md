@@ -71,4 +71,4 @@ cd agent8
 ./agent8.sh "Your prompt here"
 ```
 
-See [Evidence](/evidence) for full data. See [Reproduce](/reproduce) for detailed steps.
+See [Evidence](/agent8/evidence) for full data. See [Reproduce](/agent8/reproduce) for detailed steps.
