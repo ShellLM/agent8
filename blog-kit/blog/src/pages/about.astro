@@ -1,0 +1,38 @@
+---
+import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
+import Layout from '../layouts/BlogPost.astro';
+---
+
+<Layout
+	title="About Me"
+	description="Lorem ipsum dolor sit amet"
+	pubDate={new Date('August 08 2021')}
+	heroImage={AboutHeroImage}
+>
+	<h2>The Mission</h2>
+	<p>
+		The Agent8 project exists to bridge the gap between AI research and operational reality. We build tools and document experiments that answer one core question: <em>Can an ultra-compact shell agent design reliably complete practical Linux automation tasks with reproducible evidence?</em>
+	</p>
+
+	<h2>Target Audience</h2>
+	<p>
+		This space is built for AI researchers, advanced systems users, and developers who value transparency over abstraction. If you believe that a 254-byte script can be more powerful—and safer—than a bloated framework, you're in the right place.
+	</p>
+
+	<h2>Zero-Cost Reproducibility</h2>
+	<p>
+		This blog is designed for long-term sustainability. Built with <strong>Astro</strong> and hosted on <strong>GitHub Pages</strong>, it costs exactly $0 to maintain while providing a first-class publication surface for deeply technical content.
+	</p>
+
+	<h2>Protocol</h2>
+	<p>
+		Every post on this site must include:
+	</p>
+	<ul>
+		<li>Run ID and immutable artifact tags.</li>
+		<li>Exact scripts, prompts, and configurations used.</li>
+		<li>Raw logs and derived performance metrics.</li>
+		<li>Direct links to evidence for every substantive claim.</li>
+	</ul>
+
+</Layout>

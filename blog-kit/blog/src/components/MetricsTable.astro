@@ -1,0 +1,59 @@
+---
+interface Props {
+	items: {
+		label: string;
+		value: string | number;
+		unit?: string;
+	}[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="metrics-container">
+	<table class="metrics-table">
+		<thead>
+			<tr>
+				<th>Metric</th>
+				<th>Value</th>
+			</tr>
+		</thead>
+		<tbody>
+			{items.map((item) => (
+				<tr>
+					<td>{item.label}</td>
+					<td>{item.value} {item.unit}</td>
+				</tr>
+			))}
+		</tbody>
+	</table>
+</div>
+
+<style>
+	.metrics-container {
+		margin: 2rem 0;
+		border: 3px solid #585757;
+		box-shadow: 8px 8px 0px 0px #585757;
+		background: #fff;
+		overflow-x: auto;
+	}
+	.metrics-table {
+		width: 100%;
+		border-collapse: collapse;
+		text-align: left;
+	}
+	.metrics-table th, .metrics-table td {
+		padding: 0.75rem 1rem;
+		border-bottom: 1px solid #e9e9e9;
+	}
+	.metrics-table th {
+		background: #000;
+		color: #fff;
+		text-transform: uppercase;
+		font-size: 0.8rem;
+		letter-spacing: 0.05rem;
+	}
+	.metrics-table tr:last-child td {
+		border-bottom: none;
+	}
+</style>

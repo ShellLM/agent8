@@ -1,0 +1,41 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>🚀 Agent8: Minimalist Autonomy</h1>
+			<p>
+				Welcome to the <strong>Agent8</strong> lab. This site is a publication surface for LLM-agent experiments and an operational toolkit designed for high-stakes reproducibility.
+			</p>
+			<p>
+				Our core research focuses on ultra-compact shell agent designs—specifically the <strong>280-byte concept</strong>—and whether they can reliably complete complex Linux automation tasks with verifiable evidence.
+			</p>
+			
+			<h2>Operational Roadmap</h2>
+			<ul>
+				<li><strong>Publication Surface:</strong> Narrative writeups and interactive experiment pages.</li>
+				<li><strong>Evidence Engine:</strong> Every post is backed by immutable artifact tags, raw logs, and metric snapshots.</li>
+				<li><strong>Operational Toolkit:</strong> Reusable scripts, templates, and eval utilities for the next generation of agents.</li>
+			</ul>
+
+			<p>
+				Every experiment published here follows a non-negotiable reproducibility protocol: exact scripts, raw CLI logs, and 100% Linux compatibility.
+			</p>
+			
+			<p>
+				Explore the <a href="/blog">Archive</a> or check out our mission on the <a href="/about">About</a> page.
+			</p>
+		</main>
+		<Footer />
+	</body>
+</html>

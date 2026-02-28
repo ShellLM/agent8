@@ -1,0 +1,92 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Toolkit | ${SITE_TITLE}`} description="Core scripts and utilities for the Agent8 experiment framework." />
+		<style>
+			main {
+				width: 960px;
+				max-width: calc(100% - 2em);
+				margin: auto;
+				padding: 3em 1em;
+			}
+			.tool-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+				gap: 2rem;
+				margin-top: 2rem;
+			}
+			.tool-card {
+				padding: 1.5rem;
+				border: 3px solid #585757;
+				box-shadow: 8px 8px 0px 0px #585757;
+				background: #fff;
+			}
+			.tool-card h3 {
+				margin-top: 0;
+			}
+			.tool-card code {
+				background: #e9e9e9;
+				padding: 0.2rem 0.4rem;
+				border: 1px solid #ccc;
+			}
+			.download-btn {
+				display: inline-block;
+				margin-top: 1rem;
+				padding: 0.5rem 1rem;
+				border: 2px solid #000;
+				background: #000;
+				color: #fff;
+				text-decoration: none;
+				font-weight: bold;
+			}
+			.download-btn:hover {
+				background: #fff;
+				color: #000;
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>🛠️ The Operational Toolkit</h1>
+			<p>
+				Below are the core scripts used in the Agent8 experiments. These are designed for portability, 
+				transparency, and zero-cost hosting environments.
+			</p>
+
+			<div class="tool-grid">
+				<div class="tool-card">
+					<h3><code>agent8.sh</code></h3>
+					<p>The minimalist 254-byte autonomous agent core. Implements the synaptic loop and hook interface.</p>
+					<a href="/scripts/agent8.sh" class="download-btn">View Script</a>
+				</div>
+
+				<div class="tool-card">
+					<h3><code>validate_artifact.sh</code></h3>
+					<p>Ensures experiment bundles meet the non-negotiable reproducibility protocol before publication.</p>
+					<a href="/scripts/validate_artifact.sh" class="download-btn">View Script</a>
+				</div>
+
+				<div class="tool-card">
+					<h3><code>ai_hooks.sh</code></h3>
+					<p>The standard interface for tool execution, environment hardening, and safety interceptors.</p>
+					<a href="/scripts/ai_hooks.sh" class="download-btn">View Script</a>
+				</div>
+			</div>
+
+			<h2 style="margin-top: 4rem;">Usage Pattern</h2>
+			<p>
+				To initiate a verifiable experiment run using this toolkit, follow the <strong>Algorithm</strong> 
+				documented in our methodology post.
+			</p>
+		</main>
+		<Footer />
+	</body>
+</html>

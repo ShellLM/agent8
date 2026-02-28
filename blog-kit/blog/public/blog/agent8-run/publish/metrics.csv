@@ -1,0 +1,8 @@
+metric,value
+task_pass_rate,0.6667
+avg_latency_ms,4633.33
+failed_runs,1
+failed_run_rate,0.3333
+blocked_attempts,3
+retry_rate,0.0000
+sample_size_runs,3

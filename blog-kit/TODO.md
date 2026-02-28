@@ -1,27 +1,17 @@
-# TODO - Agent8 Project (Updated 2026-02-16)
+# TODO - Agent8 Blog Kit
 
 ## ✅ Completed
 - [x] Release v1.0.0-agent8 tagged and pushed
 - [x] Post-release cleanup and archival
-- [x] Triage report created
-- [x] Verification passed (SHA256 checksums)
+- [x] Astro blog scaffolded with MDX, RSS, sitemap
+- [x] 4 blog posts published (agent8-run, safety-2026, algorithm, artifact-validation)
+- [x] Toolkit page with script viewer
+- [x] MetricsTable component
+- [x] Experiment checklist template (downloadable)
+- [x] Pre-commit cleanup for GitHub
 
-## 📋 Optional Future Work
-- [ ] Publish blog_draft_v2.md to blog platform
+## 📋 Future Work
+- [ ] Replace placeholder hero images with real ones
 - [ ] Add CI/CD for automated validation
 - [ ] Expand validate_artifact.sh with more checks
-
-## 📁 Project Structure (Current)
-```
-blog-kit/
-├── TODO.md              # This file
-├── next_session_plan.md # Session status
-├── blog_draft_v2.md     # Draft in progress
-├── validate_artifact.sh # Validation tool
-├── session_resume.sh    # Resume utility
-├── post_release_triage_2026-02-16.md
-└── archive/             # Historical files
-    ├── published_2026_02_15/
-    ├── artifact_bundle_2026_02_14/
-    └── ...
-```
+- [ ] Add more experiment posts
