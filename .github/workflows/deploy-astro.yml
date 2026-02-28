@@ -4,7 +4,7 @@ on:
   push:
     branches: ["master", "main"]
     paths:
-      - 'site/**'
+      - 'blog-kit/blog/**'
       - '.github/workflows/deploy-astro.yml'
   workflow_dispatch:
 
@@ -29,20 +29,20 @@ jobs:
         with:
           node-version: "20"
           cache: npm
-          cache-dependency-path: site/package-lock.json
+          cache-dependency-path: blog-kit/blog/package-lock.json
           
       - name: Install dependencies
-        working-directory: ./site
+        working-directory: ./blog-kit/blog
         run: npm ci
         
       - name: Build with Astro
-        working-directory: ./site
+        working-directory: ./blog-kit/blog
         run: npm run build
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./site/dist
+          path: ./blog-kit/blog/dist
 
   deploy:
     environment:
