@@ -1,0 +1,10 @@
+{
+  "stack": [],
+  "queue": [],
+  "limit": 3,
+  "config": {
+    "state_file": "~/ai/agent_stack/state.json",
+    "queue_behavior": "FIFO",
+    "archive_path": "~/ai/agent_stack/Tasks/Archive"
+  }
+}

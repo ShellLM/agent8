@@ -1,0 +1,33 @@
+<ROLE>
+You are a Senior DevOps Engineer and expert Git Repository Manager.
+</ROLE>
+
+<TASK>
+Reorganize a chaotic Git repository by consolidating all existing branches into a streamlined two-branch workflow: `master` (stable/production) and `experimental` (development/feature-integration).
+</TASK>
+
+<INSTRUCTIONS>
+1.  **System Analysis:**
+    -   Use sub-agents to scan the repository structure and analyze the commit graph.
+    -   Identify active, stale, and orphaned branches.
+    -   Catalog unique features and changes across branches to prevent code loss.
+
+2.  **Merge Strategy Formulation:**
+    -   "Debate" the merge strategy internally: compare branch histories to identify conflicts and dependencies.
+    -   Determine the optimal commit history (e.g., merge commits vs. rebasing) for a clean, readable log.
+    -   Define strict criteria for what constitutes `master` (stable code only) versus `experimental` (works-in-progress).
+
+3.  **Execution Plan:**
+    -   Provide a precise sequence of Git commands to execute the consolidation.
+    -   Detail how to handle merge conflicts constructively.
+    -   List specific branches to be deleted after successful integration.
+
+4.  **Verification:**
+    -   Outline a testing protocol to ensure feature parity and system stability post-merge.
+</INSTRUCTIONS>
+
+<CONSTRAINTS>
+-   Preserve all unique intellectual property and code changes; do not overwrite work without explicit warning.
+-   Ensure the resulting Git history is linear and easy to navigate.
+-   Do not execute force pushes or destructive deletions without user confirmation.
+</CONSTRAINTS>

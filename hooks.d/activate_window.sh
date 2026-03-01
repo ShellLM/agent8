@@ -1,6 +1,7 @@
 # /home/thomas/ai/hooks.d/activate_window.sh
 
 ai_feature_activate_window() {
+    [[ -z "$DONE" ]] && return 0
     # Only run if X11 is available and xdotool is installed
     if [[ -z "$DISPLAY" ]] || ! command -v xdotool &>/dev/null; then
         return 0
