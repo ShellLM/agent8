@@ -19,6 +19,57 @@ Security level: LOW (The user confirms they understand the risks.)" "$c")
     echo -e "\033[31mREJECTED\033[0m"
     echo -e "\033[31mREASON:\033[0m $audit_result"
 
+    # Show dialog for human override
+    local human_choice="reject"
+    
+    if [[ -n "$DISPLAY" ]]; then
+        if command -v zenity &>/dev/null; then
+            if zenity --question \
+                --title="Safety Override Required" \
+                --text="Command rejected by safety judge:\n\n${audit_result}\n\nCommand:\n${c}" \
+                --ok-label="Approve" \
+                --cancel-label="Reject" \
+                --timeout=60 2>/dev/null; then
+                human_choice="approve"
+            fi
+        elif command -v kdialog &>/dev/null; then
+            if kdialog --warningyesno "Command rejected by safety judge:\n\n${audit_result}\n\nCommand:\n${c}" \
+                --yes-label "Approve" \
+                --no-label "Reject" 2>/dev/null; then
+                human_choice="approve"
+            fi
+        elif command -v yad &>/dev/null; then
+            if yad --question \
+                --title="Safety Override Required" \
+                --text="Command rejected by safety judge:\n\n${audit_result}\n\nCommand:\n${c}" \
+                --button="Approve:0" \
+                --button="Reject:1" \
+                --timeout=60 2>/dev/null; then
+                human_choice="approve"
+            fi
+        fi
+    fi
+
+    # Handle human approval - record the safety judge failure
+    if [[ "$human_choice" == "approve" ]]; then
+        echo -e "\033[33m[!] Human override: APPROVED\033[0m"
+        
+        # Record the safety judge failure via feedback
+        local resp_id
+        resp_id=$(sqlite3 -noheader -cmd ".timeout 5000" \
+            "${LOGS_PATH:-$HOME/.config/io.datasette.llm/logs.db}" \
+            "SELECT id FROM responses WHERE prompt LIKE '%U:$u%' ORDER BY id DESC LIMIT 1" 2>/dev/null)
+        
+        if [[ -n "$resp_id" ]]; then
+            llm feedback-1 --prompt_id "$resp_id" "[safety-judge-false-positive] reason:'${audit_result}' cmd:'${c}'" 2>/dev/null
+        fi
+        
+        return 0
+    fi
+
+    # Timeout or explicit rejection
+    echo -e "\033[31m[!] Human rejected or timeout\033[0m"
+
     if [[ -z "$HEAL_ATTEMPTED" ]]; then
         echo -e "\033[33m[!] Attempting to heal command...\033[0m"
         export HEAL_ATTEMPTED=1

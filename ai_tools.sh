@@ -12,14 +12,6 @@ WHERE response LIKE '%${search_string}%'
 ORDER BY datetime_utc DESC LIMIT 1;" 2> /dev/null
 }
 
-llm-last-cid () {
-	sqlite3 -noheader "$LLM_LOGS_DB" "
-    SELECT conversation_id 
-    FROM responses 
-    ORDER BY datetime_utc DESC 
-    LIMIT 1;"
-}
-
 get_cid_from_prompt () {
 	local search_string="$1" 
 	sqlite3 -noheader -init /dev/null $(llm logs path) \
@@ -74,6 +66,7 @@ google_search() {
 }
 
 read_screen() {
+    mkdir -p "$HOME/.cache/ai_screen"
     local t=$(date +%s); local img="$HOME/.cache/ai_screen/$t.png"
     if command -v scrot >/dev/null 2>&1; then scrot -o "$img" >/dev/null 2>&1
     elif command -v spectacle >/dev/null 2>&1; then spectacle -b -n -o "$img" >/dev/null 2>&1
@@ -90,14 +83,15 @@ read_screen() {
 }
 
 
-
 # Agent Spawn Tool for Parallel Execution
 spawn() {
     local task_desc="$1"
     local sub_u=$(uuidgen)
     echo "[SPAWN] Launching sub-agent for task: $task_desc"
-    # Execute a sub-agent with a specific task-focused system prompt
-    (o="[SUB-TASK]: $task_desc" bash ./agent8.sh --cid "$(llm-last-cid)" > "logs/sub-agents/$sub_u.log" 2>&1) &
+    # Each sub-agent gets its own fresh conversation — never share --cid
+    # with the parent, as parallel writes to the same conversation cause
+    # race conditions and context corruption.
+    (o="[SUB-TASK]: $task_desc" bash ./agent8.sh > "logs/sub-agents/$sub_u.log" 2>&1) &
     echo "[SPAWN] Sub-agent PID $! started. Output: logs/sub-agents/$sub_u.log"
 }
 
@@ -106,4 +100,41 @@ gather() {
     echo "[SYNC] Waiting for all background tasks to complete..."
     wait
     echo "[SYNC] All tasks finished."
+}
+
+# Safer alternative to ai_import
+ai_safe_import() {
+    local script_rel_path="$1" # e.g., "agent8_mini.sh" or "hooks.d/vision.sh"
+    local script_path="$HOME/ai/$script_rel_path"
+    local hash_file="$HOME/ai/expected_hashes.txt"
+
+    if [[ ! -f "$script_path" ]]; then
+        echo "Error: Script $script_rel_path not found in ~/ai/" >&2
+        return 1
+    fi
+
+    # Retrieve the expected hash (handling both full paths and relative names)
+    local expected_hash=$(grep "$script_rel_path" "$hash_file" | head -n 1 | awk '{print $1}')
+
+    if [[ -z "$expected_hash" ]]; then
+        echo "Error: No trusted hash found for $script_rel_path. Please run 'sha256sum $script_path >> $hash_file' after verifying the code." >&2
+        return 1
+    fi
+
+    # Calculate the actual hash
+    local actual_hash=$(sha256sum "$script_path" | awk '{print $1}')
+
+    if [[ "$actual_hash" == "$expected_hash" ]]; then
+        source "$script_path"
+        # Export functions so they are available in subshells
+        # This solves the 'command not found' issue in child processes
+        while read -r line; do
+            if [[ $line =~ ^([a-zA-Z0-9_]+)\(\) ]]; then
+                export -f "${BASH_REMATCH[1]}"
+            fi
+        done < "$script_path"
+    else
+        echo "SECURITY ALERT: Hash mismatch for $script_rel_path!" >&2
+        return 1
+    fi
 }

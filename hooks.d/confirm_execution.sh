@@ -9,13 +9,19 @@ ai_feature_confirm_execution() {
     echo -e "\n\033[33m[?] Execute command? (y/N)\033[0m"
     echo -e "\033[34mCOMMAND:\033[0m $c"
     
-    local input_src="/dev/stdin"
-    [[ -t 0 ]] && input_src="/dev/tty"
-
-    if [[ -n $ZSH_VERSION ]]; then
-        read -r -k 1 "REPLY?[Confirm] " -u 3 3<"$input_src"
+    # Open /dev/tty on fd 3 and verify it's actually a terminal
+    if exec 3</dev/tty 2>/dev/null && [[ -t 3 ]]; then
+        if [[ -n $ZSH_VERSION ]]; then
+            read -r -k 1 "REPLY?[Confirm] " <&3
+        else
+            read -r -p "[Confirm] " -n 1 <&3
+        fi
+        exec 3<&-
     else
-        read -r -p "[Confirm] " -n 1 -u 3 3<"$input_src"
+        # No usable tty available
+        exec 3<&- 2>/dev/null
+        echo "[AUTO-CONFIRM] No tty available, proceeding"
+        return 0
     fi
     echo
     

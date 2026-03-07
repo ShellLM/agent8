@@ -2,8 +2,43 @@
 
 ai_pre_prompt_hook() {
     if [ -z "$FIRST_TURN" ]; then
-        SYS_TOOLS="$(~/ai/ai_tools.sh)"
+        # Populate SYS_TOOLS with the FULL content of ai_tools.sh
+        SYS_TOOLS="$(cat ~/ai/ai_tools.sh)"
+        source ~/ai/ai_tools.sh
         export FIRST_TURN=1
+        # Inject full source code as few-shot prompt
+        o="[TOOLS]: Full source code follows as few-shot prompt for bash style:
+"
+        o="${o}
+\`\`\`\`bash
+$SYS_TOOLS
+\`\`\`\`
+
+$o"
+    fi
+}
+
+ai_feature_clipboard_report() {
+    # If this is a spawned sub-agent with a clipboard task ID
+    if [[ -n "${CLIPBOARD_TASK_ID:-}" && -f ~/ai/Clip_agent/clip_queue.db ]]; then
+        local status="failed"
+        local exit_code="${PIPESTATUS:-1}"
+        
+        if [[ "$DONE" == "1" ]]; then
+            status="completed"
+            exit_code=0
+        elif [[ "$HEALING" == "1" ]]; then
+            status="healing"
+        fi
+        
+        sqlite3 ~/ai/Clip_agent/clip_queue.db <<EOSQL
+UPDATE clip_queue 
+SET status='$status', 
+    exit_code=$exit_code, 
+    completed_at=$(date +%s),
+    healing_attempts = CASE WHEN '$status' = 'healing' THEN healing_attempts + 1 ELSE healing_attempts END
+WHERE id='$(echo "$CLIPBOARD_TASK_ID" | sed "s/'/''/g")';
+EOSQL
     fi
 }
 
@@ -12,6 +47,7 @@ AI_RESPONSE_PLUGINS=(
     ai_feature_llm_safety_check
     ai_feature_activate_window
     ai_feature_confirm_execution
+    ai_feature_clipboard_report
 )
 
 ai_handle_response_hook() {
@@ -41,28 +77,24 @@ ai_handle_response_hook() {
         # Case 1: Correction on Turn 2
         if [[ -n "$PENDING_FEEDBACK_ID" ]]; then
             llm feedback-1 --prompt_id "$PENDING_FEEDBACK_ID" "[err:formatting] turn:1" > /dev/null 2>&1
-
             unset PENDING_FEEDBACK_ID
         elif [[ -z "$HAD_FIRST_RESPONSE" ]]; then
-            resp_id=$(sqlite3 -noheader -cmd ".timeout 5000" "$(llm logs path)" "SELECT id FROM responses ${u:+WHERE prompt LIKE '%U:$u%'} ORDER BY id DESC LIMIT 1" 2>/dev/null)
+            resp_id=$(sqlite3 -noheader -cmd ".timeout 5000" /home/thomas/.config/io.datasette.llm/logs.db "SELECT id FROM responses ${u:+WHERE prompt LIKE '%U:$u%'} ORDER BY id DESC LIMIT 1" 2>/dev/null)
             llm feedback+1 --prompt_id "$resp_id" "[ok:formatting]" > /dev/null 2>&1
-
             export HAD_FIRST_RESPONSE=1
         fi
 
-        cat <<EOF > /tmp/ai_code_$u.sh
-source ~/ai/ai_tools.sh
-$c
-EOF
-        script -q -e -c "bash /tmp/ai_code_$u.sh" /tmp/ai_out_$u_$u_$u
+
+        printf '%s\n' "source ~/ai/ai_tools.sh" "$c" > /tmp/ai_code_$u.sh
+        script -q -e -c "bash /tmp/ai_code_$u.sh" /tmp/ai_out_$u
         exit_code=$?
-        o=$(cat /tmp/ai_out_$u_$u_$u)
+        o=$(cat /tmp/ai_out_$u)
         echo -e "\033[35mEXIT CODE:\033[0m $exit_code"
-        d=$(sqlite3 -noheader -cmd ".timeout 5000" "$(llm logs path)" "SELECT conversation_id FROM responses ${u:+WHERE prompt LIKE '%U:$u%'} ORDER BY id DESC LIMIT 1" 2>/dev/null)
+        d=$(sqlite3 -noheader -cmd ".timeout 5000" /home/thomas/.config/io.datasette.llm/logs.db "SELECT conversation_id FROM responses ${u:+WHERE prompt LIKE '%U:$u%'} ORDER BY id DESC LIMIT 1" 2>/dev/null)
     elif [[ -z $HAD_FIRST_RESPONSE ]]; then
-        export HAD_FIRST_RESPONSE=1
+        export HAD_FIRST_RESPONSE=1 
         o="[SYSTEM WARNING]: No code block detected. Use \`\`\`\` to execute bash or reply 'NO OP'."
-        d=$(sqlite3 -noheader -cmd ".timeout 5000" "$(llm logs path)" "SELECT conversation_id FROM responses ORDER BY id DESC LIMIT 1" 2>/dev/null)
+        d=$(sqlite3 -noheader -cmd ".timeout 5000" /home/thomas/.config/io.datasette.llm/logs.db "SELECT conversation_id FROM responses ORDER BY id DESC LIMIT 1" 2>/dev/null)
     else
         DONE=1
     fi
@@ -71,10 +103,12 @@ EOF
 export P="ai_pre_prompt_hook"
 export R="ai_handle_response_hook"
 
-if [[ -d ./hooks.d ]]; then
-    for plugin in ./hooks.d/*.sh; do source "$plugin"; done
+if [[ -d ~/ai/hooks.d ]]; then
+    for plugin in ~/ai/hooks.d/*.sh; do source "$plugin"; done
 fi
+
 export -f ai_pre_prompt_hook ai_handle_response_hook
-for f in ai_feature_llm_safety_check ai_feature_activate_window ai_feature_confirm_execution; do
+
+for f in ai_feature_llm_safety_check ai_feature_activate_window ai_feature_confirm_execution ai_feature_clipboard_report; do
     declare -f "$f" >/dev/null && export -f "$f"
 done
