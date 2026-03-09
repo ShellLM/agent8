@@ -6,6 +6,8 @@ ai_pre_prompt_hook() {
         SYS_TOOLS="$(cat ~/ai/ai_tools.sh)"
         source ~/ai/ai_tools.sh
         export FIRST_TURN=1
+        # Call attachment injection hook
+        ai_feature_attachment_inject 2>/dev/null || true
         # Inject full source code as few-shot prompt
         o="[TOOLS]: Full source code follows as few-shot prompt for bash style:
 "
@@ -112,3 +114,19 @@ export -f ai_pre_prompt_hook ai_handle_response_hook
 for f in ai_feature_llm_safety_check ai_feature_activate_window ai_feature_confirm_execution ai_feature_clipboard_report; do
     declare -f "$f" >/dev/null && export -f "$f"
 done
+
+# Inject attachment flags into the llm command via P hook
+ai_feature_attachment_inject() {
+    if [[ ${#ATTACHMENT_QUEUE[@]} -gt 0 ]]; then
+        local attach_flags=""
+        for f in "${ATTACHMENT_QUEUE[@]}"; do
+            attach_flags="$attach_flags -a $f"
+        done
+        # Store for agent8.sh to use - we set a variable it can read
+        export ATTACH_FLAGS="$attach_flags"
+        echo "[HOOK] Attachment flags prepared: $attach_flags"
+    fi
+}
+
+# Prepend to pre-prompt hooks
+AI_PRE_PROMPT_HOOKS=("ai_feature_attachment_inject" "${AI_PRE_PROMPT_HOOKS[@]:-}")

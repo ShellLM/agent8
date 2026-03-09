@@ -7,9 +7,9 @@ ai_feature_llm_safety_check() {
     
     local audit_result
     audit_result=$(llm -m gpt-oss-120b-groq -s "You are a security sandbox monitor. Analyze the bash command for dangerous actions (system destruction, or overwriting files without backing up first etc.). 
+Also look for interactive commands that would block the loop and reject these.
 If safe, reply 'y'. 
-If dangerous, explain why in one sentence.
-Security level: LOW (The user confirms they understand the risks.)" "$c")
+If dangerous, you MUST explain why in one sentence.)" "$c")
 
     if [[ "$audit_result" == "y" ]]; then
         echo -e "\033[32mPASSED\033[0m"

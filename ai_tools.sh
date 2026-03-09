@@ -138,3 +138,36 @@ ai_safe_import() {
         return 1
     fi
 }
+
+# File attachment system for agent sessions
+declare -a ATTACHMENT_QUEUE=()
+
+attach_file() {
+    local file_path="$1"
+    local description="${2:-}"
+    
+    if [[ ! -f "$file_path" ]]; then
+        echo "[ATTACH] Error: File not found: $file_path" >&2
+        return 1
+    fi
+    
+    ATTACHMENT_QUEUE+=("$file_path")
+    echo "[ATTACH] Queued: $file_path${description:+ ($description)}"
+    return 0
+}
+
+attach_clear() {
+    ATTACHMENT_QUEUE=()
+    echo "[ATTACH] Cleared attachment queue"
+}
+
+attach_list() {
+    if [[ ${#ATTACHMENT_QUEUE[@]} -eq 0 ]]; then
+        echo "[ATTACH] No files queued"
+    else
+        echo "[ATTACH] Queued files:"
+        for f in "${ATTACHMENT_QUEUE[@]}"; do
+            echo "  - $f"
+        done
+    fi
+}
