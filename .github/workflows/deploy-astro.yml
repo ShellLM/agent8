@@ -20,6 +20,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      ASTRO_TELEMETRY_DISABLED: 1
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -31,13 +33,26 @@ jobs:
           cache: npm
           cache-dependency-path: blog-kit/blog/package-lock.json
           
+      - name: Cache Astro build
+        uses: actions/cache@v4
+        with:
+          path: |
+            blog-kit/blog/node_modules/.astro
+            blog-kit/blog/.astro
+          key: astro-${{ runner.os }}-${{ hashFiles('blog-kit/blog/package-lock.json') }}-${{ hashFiles('blog-kit/blog/src/**') }}
+          restore-keys: |
+            astro-${{ runner.os }}-${{ hashFiles('blog-kit/blog/package-lock.json') }}-
+            astro-${{ runner.os }}-
+
       - name: Install dependencies
         working-directory: ./blog-kit/blog
-        run: npm ci
+        run: npm ci --prefer-offline
         
       - name: Build with Astro
         working-directory: ./blog-kit/blog
         run: npm run build
+        env:
+          NODE_ENV: production
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
